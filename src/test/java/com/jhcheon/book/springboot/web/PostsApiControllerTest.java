@@ -2,6 +2,7 @@ package com.jhcheon.book.springboot.web;
 
 import com.jhcheon.book.springboot.web.domain.posts.Posts;
 import com.jhcheon.book.springboot.web.domain.posts.PostsRepository;
+import com.jhcheon.book.springboot.web.dto.PostsResponseDto;
 import com.jhcheon.book.springboot.web.dto.PostsSaveRequestDto;
 import com.jhcheon.book.springboot.web.dto.PostsUpdateRequestDto;
 import org.json.JSONArray;
@@ -96,5 +97,31 @@ public class PostsApiControllerTest {
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
+    }
+
+    @Test
+    public void Posts_findById() throws Exception {
+        Posts savedPosts = postsRepository.save(Posts.builder().title("title")
+                .content("content")
+                .author("author")
+                .build());
+
+        Long postId = savedPosts.getId();
+        String url = "http://localhost:" + port + "api/v1/posts/" + postId;
+
+//        HttpEntity<Long> requestEntity = new HttpEntity<>(new Long(1));
+//        ResponseEntity<PostsResponseDto> responseEntity = restTemplate.getForEntity(url, PostsResponseDto.class, requestEntity);
+//
+//        System.out.println(responseEntity.getBody());
+
+//        ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, 1);
+        PostsResponseDto responseEntity = restTemplate.getForObject(url, PostsResponseDto.class, 1);
+        System.out.println("sibal");
+        System.out.println(responseEntity.getContent());
+    }
+
+    @Test
+    public void Posts_삭제된다() throws Exception {
+
     }
 }
