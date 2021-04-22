@@ -24,4 +24,13 @@ public class ProfileController {
                 .findAny()
                 .orElse(defaultProfile);
     }
+
+    @GetMapping("/profiles")
+    public String profiles() {
+        List<String> profiles = Arrays.asList(env.getActiveProfiles());
+        String rtr = "";
+        for (String profile : profiles) rtr += profile;
+
+        return rtr;
+    }
 }
