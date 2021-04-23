@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-fuction find_idle_profile()
+function find_idle_profile()
 {
   RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/profile)
 
