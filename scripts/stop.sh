@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#엔진엑스와 연결되지 않은 포트에서 실행 중이던 스프링 부트 종료
 
 ABSPATH=$(readlink -f $0)
 ABSDIR=$(dirname $ABSPATH)
